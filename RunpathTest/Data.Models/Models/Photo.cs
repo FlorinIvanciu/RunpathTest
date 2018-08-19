@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Data.Models
 {
-    class Photo
+   public class Photo
     {
         public int Id { get; set; }
         public int AlbumId { get; set; }

@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Business;
+using Business.Core;
+using Data;
+using Data.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -31,7 +35,9 @@ namespace RunpathTest
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddHttpClient();
+            services.AddHttpClient<IHttpHandler<Photo>,HttpHandler<Photo>>();
+            services.AddHttpClient<IHttpHandler<Album>, HttpHandler<Album>>();
+            services.AddTransient<IDataHandler, DataHandler>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
