@@ -4,19 +4,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using Business.Core;
 using Data.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
 
 namespace RunpathTest.Controllers.Api
 {
     [Route("api/[controller]")]
-    public class DataTableController : Controller
+    [ApiController]
+    public class DataTableController : ControllerBase
     {
         private readonly IDataHandler dataHandler;
 
         public DataTableController(IDataHandler dataHandler)
         {
-            this.dataHandler = dataHandler;
+            this.dataHandler = dataHandler ?? throw new ArgumentNullException(nameof(dataHandler));
         }
 
         [HttpGet]
@@ -24,6 +25,5 @@ namespace RunpathTest.Controllers.Api
         {
             return await dataHandler.GetDataTableAsync();
         }
-
     }
 }

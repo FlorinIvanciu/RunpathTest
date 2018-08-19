@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Data
+namespace Business
 {
     public interface IHttpHandler<T> where T : class
     {

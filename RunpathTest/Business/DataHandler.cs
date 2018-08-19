@@ -1,5 +1,4 @@
 ﻿using Business.Core;
-using Data;
 using Data.Models;
 using System;
 using System.Collections.Generic;
@@ -10,15 +9,15 @@ namespace Business
 {
     public class DataHandler : IDataHandler
     {
-        private readonly HttpHandler<Photo> httpPhotoHandler;
-        private readonly HttpHandler<Album> httpAlbumHandler;
+        private readonly IHttpHandler<Photo> httpPhotoHandler;
+        private readonly IHttpHandler<Album> httpAlbumHandler;
         private const string AlbumEndPoint = "http://jsonplaceholder.typicode.com/albums";
         private const string PhotoEndPoint = "http://jsonplaceholder.typicode.com/photos";
 
-        IEnumerable<Album> albums = null;
-        IEnumerable<Photo> photos = null;
+        private IEnumerable<Album> albums = null;
+        private IEnumerable<Photo> photos = null;
 
-        public DataHandler(HttpHandler<Photo> httpPhotoHandler, HttpHandler<Album> httpAlbumHandler)
+        public DataHandler(IHttpHandler<Photo> httpPhotoHandler, IHttpHandler<Album> httpAlbumHandler)
         {
             this.httpPhotoHandler = httpPhotoHandler ?? throw new ArgumentNullException(nameof(httpPhotoHandler));
             this.httpAlbumHandler = httpAlbumHandler ?? throw new ArgumentNullException(nameof(httpAlbumHandler));

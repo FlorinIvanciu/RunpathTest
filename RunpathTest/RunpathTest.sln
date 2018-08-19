@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27703.2047
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunpathTest", "RunpathTest\RunpathTest.csproj", "{F681D8AB-4CB1-455E-9402-11B1FE757DA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{7110F611-12D7-43B6-8785-BA8C8C09D96C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.DataHttpClient", "Data\Core.DataHttpClient.csproj", "{7110F611-12D7-43B6-8785-BA8C8C09D96C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Models", "Data.Models\Data.Models.csproj", "{757A6768-B0F8-4BD2-9CA1-506B45124397}"
 EndProject

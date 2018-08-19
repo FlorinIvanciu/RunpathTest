@@ -1,10 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using Business;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Data
+namespace Core.DataHttpClient
 {
     public class HttpHandler<T> : IHttpHandler<T> where T:class
     {
@@ -18,8 +20,8 @@ namespace Data
         public async Task<IEnumerable<T>> GetResultsAsync(string endPoint)
         {
             var response = await httpClient.GetAsync(endPoint);
-            var data = response.Content.ToString();
-            return JsonConvert.DeserializeObject<IEnumerable<T>>(data);
+            var data = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<IEnumerable<T>>(data).ToList();
         }
     }
 }
