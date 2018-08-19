@@ -5,6 +5,6 @@ namespace Business
 {
     public interface IHttpHandler<T> where T : class
     {
-        Task<IEnumerable<T>> GetResultsAsync(string endPoint);
+        Task<IEnumerable<T>> GetResultsAsync();
     }
 }

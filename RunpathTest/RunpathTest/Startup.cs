@@ -32,8 +32,11 @@ namespace RunpathTest
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddHttpClient<IHttpHandler<Photo>,HttpHandler<Photo>>();
-            services.AddHttpClient<IHttpHandler<Album>, HttpHandler<Album>>();
+            var photosEndpoint = Configuration.GetValue<string>("Endpoints:Photo");
+            var albumsEndpoint = Configuration.GetValue<string>("Endpoints:Album");
+
+            services.AddTransient<IHttpHandler<Photo>>(_ => new HttpHandler<Photo>(photosEndpoint));
+            services.AddTransient<IHttpHandler<Album>>(_ => new HttpHandler<Album>(albumsEndpoint));
             services.AddTransient<IDataHandler, DataHandler>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

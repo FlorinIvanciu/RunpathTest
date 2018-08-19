@@ -11,8 +11,6 @@ namespace Business
     {
         private readonly IHttpHandler<Photo> httpPhotoHandler;
         private readonly IHttpHandler<Album> httpAlbumHandler;
-        private const string AlbumEndPoint = "http://jsonplaceholder.typicode.com/albums";
-        private const string PhotoEndPoint = "http://jsonplaceholder.typicode.com/photos";
 
         private IEnumerable<Album> albums = null;
         private IEnumerable<Photo> photos = null;
@@ -27,19 +25,17 @@ namespace Business
         {
             await Task.Factory.StartNew(async () =>
             {
-                albums = await httpAlbumHandler.GetResultsAsync(AlbumEndPoint);
-                photos = await httpPhotoHandler.GetResultsAsync(PhotoEndPoint);
+                albums = await httpAlbumHandler.GetResultsAsync();
+                photos = await httpPhotoHandler.GetResultsAsync();
             }).GetAwaiter().GetResult();
 
-            var result = albums.SelectMany(a => photos.Where(p => p.AlbumId == a.Id).Select(v => new DataTableModel()
+            return albums.SelectMany(a => photos.Where(p => p.AlbumId == a.Id).Select(v => new DataTableModel()
             {
                 AlbumName = a.Title,
                 PhotoTitle = v.Title,
                 Thumbnail = v.ThumbnailUrl,
                 Url = v.Url
             }));
-
-            return result;
         }
     }
 }

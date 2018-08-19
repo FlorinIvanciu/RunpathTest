@@ -10,16 +10,18 @@ namespace Core.DataHttpClient
 {
     public class HttpHandler<T> : IHttpHandler<T> where T:class
     {
-        private readonly HttpClient httpClient;
+        private readonly string endpoint;
+        private readonly HttpClient _httpClient;
 
-        public HttpHandler(HttpClient httpClient)
+        public HttpHandler(string endpoint)
         {
-            this.httpClient = httpClient;
+            this._httpClient = new HttpClient();
+            this.endpoint = endpoint;
         }
 
-        public async Task<IEnumerable<T>> GetResultsAsync(string endPoint)
+        public async Task<IEnumerable<T>> GetResultsAsync()
         {
-            var response = await httpClient.GetAsync(endPoint);
+            var response = await _httpClient.GetAsync(endpoint);
             var data = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<IEnumerable<T>>(data).ToList();
         }
